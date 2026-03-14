@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .rating-box { border: 1px solid #ccc; padding: 20px; width: 300px; }
+        input { margin-bottom: 10px; display: block; width: 100%; }
+    </style>
+    <title>Lane Tech - Rate My Professor</title>
+</head>
+<body>
+
+    <h2>Rate a Professor</h2>
+    
+    <div class="rating-box">
+        <label>Professor Name:</label>
+        <input type="text" id="profName" placeholder="Enter name...">
+        
+        <hr>
+        
+        <label>Kindness (1-10):</label>
+        <input type="number" id="kindness" min="1" max="10">
+        
+        <label>Teaching (1-10):</label>
+        <input type="number" id="teaching" min="1" max="10">
+        
+        <label>Workload (1 = No Work, 10 = Drowning in Busy Work):</label>
+        <input type="number" id="workload" min="1" max="10">
+        
+        <button onclick="submitRating()">Submit Review</button>
+    </div>
+
+    <script>
+        async function submitRating() {
+
+            const data = {
+                name: document.getElementById('profName').value,
+                ratings: [
+                    document.getElementById('kindness').value,
+                    document.getElementById('teaching').value,
+                    document.getElementById('workload').value
+                ]
+            };
+
+            const url = "https://script.google.com/macros/s/AKfycbwiGng2FwQxk0QVs7R1p8xyp1iK0z6o5h3Cg_ZEC0DMGQHuFuwbg_yfljIAGm6axF0/exec";
+
+            await fetch(url, {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify(data)
+            });
+
+            alert("Rating submitted!");
+        }
+    </script>
+</body>
+</html>
